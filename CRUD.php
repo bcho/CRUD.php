@@ -151,7 +151,7 @@ abstract class CRUDModel
     {
         $clause = array();
         foreach ($conditionNames as $name) {
-            $clause[] = "$name = :$name";
+            $clause[] = "`$name` = :$name";
         }
         return "WHERE " . join(' AND ', $clause);
     }
@@ -170,7 +170,7 @@ abstract class CRUDModel
             unset($data[static::$pk]);
         }
         foreach ($data as $k => $v) {
-            $keys[] = "'$k'";
+            $keys[] = "`$k`";
             $values[] = ":$k";
         }
 
@@ -234,7 +234,7 @@ abstract class CRUDModel
         }
         $updated = array();
         foreach (array_keys($data) as $k) {
-            $updated[] = "'$k' = :$k";
+            $updated[] = "`$k` = :$k";
         }
         $updated = 'SET ' . join(',', $updated);
 
